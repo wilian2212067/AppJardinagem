@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Serviços{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Lista de Serviços Realizados</h1>
+    <a class="btn btn-primary mb-3" href="{% url 'servico_create' %}">Adicionar Serviço</a>
+    <a class="btn btn-secondary mb-3" href="{% url 'home' %}">Página Inicial</a>
+
+    <div class="card">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Tipo de Serviço</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for servico in servicos %}
+                        <tr>
+                            <td>{{ servico.cliente.nome }}</td>
+                            <td>{{ servico.data|date:"d/m/Y" }}</td>
+                            <td>{{ servico.hora|time:"H:i" }}</td>
+                            <td>{{ servico.tipo_servico }}</td>
+                            <td>
+                                <div class="btn-group" role="group">
+                                    <a href="{% url 'servico_edit' servico.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="{% url 'servico_delete' servico.pk %}" class="btn btn-sm btn-danger">Remover</a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos CSS personalizados para a tabela e botões */
+    .container {
+        margin-top: 50px;
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .card {
+        margin-top: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 10px;
+    }
+
+    /* Estilos para a tabela */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f8f9fa; /* Cor de fundo para cabeçalhos */
+        color: #212529; /* Cor do texto para cabeçalhos */
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+    }
+
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger {
+        text-decoration: none; /* Remover sublinhado dos botões */
+    }
+</style>
+
+{% endblock %}

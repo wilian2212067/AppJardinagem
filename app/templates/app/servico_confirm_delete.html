@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Remover Serviço{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">Remover Serviço</h1>
+            <p class="card-text">Tem certeza que deseja remover o serviço do cliente "<strong>{{ servico.cliente.nome }}</strong>"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-danger mr-3">Confirmar Remoção</button>
+                    <a href="{% url 'servico_list' %}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Estilos CSS personalizados */
+    .card {
+        width: 80%;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+    }
+
+    .card-text {
+        font-size: 18px;
+        color: #555;
+        text-align: center;
+    }
+
+    /* Estilizar botões */
+    .btn {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+</style>
+{% endblock %}
